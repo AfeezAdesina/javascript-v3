@@ -35,4 +35,4 @@ let ayo = {
     a=undefined,
     b=undefined
 };
-console.log(ayo.add.call((),{a:2,b:3})); // NaN
+console.log(ayo.add.call({a:2,b:3}),); // NaN
