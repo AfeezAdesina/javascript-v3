@@ -6,17 +6,23 @@ import './style.css';
 import '/bling.js';
 import viteLogo from '/vite.svg';
 
+// console.log($$('div'))
+
+
+
 $('#app').innerHTML = `
-  <div name="counter-div">
+  <div name="counter-div" onclick="console.log('div.counter')">
     <a href="https://vitejs.dev" target="_blank">
       <img src="${viteLogo}" class="logo" alt="Vite logo" />
     </a>
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
     </a>
-    <h1>Hello Vite!</h1>
-    <input data-testid="Name" type="text" name="name" id="name" />
-    <div class="card" my="danger">
+    <h1 onclick="learnToPickYourFight()" >Hello Vite!</h1>
+    <form>
+      <input data-testid="Name" type="text" name="name" id="name" onchange="console.log(this)" />
+    </form>
+    <div class="card" my="danger" onclick="console.log('div.card')">
       <button id="counter" type="button"></button>
 
       <p>1</p><br/>
@@ -33,7 +39,7 @@ $('#app').innerHTML = `
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
-    <table>
+    <table id="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -194,7 +200,7 @@ let content = document.body.firstChild.nextSibling.data
 // document.createElement('element', options{is?}) - creates a new element
 const newDiv = document.createElement('div')
 newDiv.on('click', () => {
-  console.log('click')
+  // console.log('click')
   newDiv.remove()
 })
 
@@ -259,7 +265,57 @@ app.append(ul)
 // offsetWidth, offsetHeight, offsetTop, offsetLeft, offsetParent(nearest positioned ancestor)
 // scrollTop, scrollLeft, scrollWidth, scrollHeight
 
-console.log(getComputedStyle($('.card')))
-console.dir($('.card'))
+// console.log(getComputedStyle($('.card')))
+// console.dir($('.card'))
 
 // functions/method manipulate scroll programmatically using javascript
+
+// events
+// different events that we have - mouse(click, dbclick, contextmenu), keyboard(keydown, keyup), form(submit, change, input, focus), document(DOMContentLoaded, loaded), window(loaded), css(transitionend), custom
+
+// event handler
+// 1. html attribute - <button onclick="handleClick()">Click me</button>
+// 2. dom property - button.onclick = handleClick
+// 3. addEventListener - button.addEventListener('click', handleClick)
+
+// event object
+// bubbling, capturing, delegation,
+// from event.target -> the last parent
+
+// form (submit)
+table.onclick = function(event) {
+  let target = event.target; // where was the click?
+
+  if (target.tagName != 'TD') return; // not on TD? Then we're not interested
+
+  // action
+  highlight(target); // highlight it
+};
+
+function highlight(node) {
+  node.style.backgroundColor = 'yellow';
+}
+
+$('form').on('submit', (event) => {
+  event.preventDefault()
+
+  console.log(event)
+  console.log(event.target.name.value)
+  console.log('form submitted')
+})
+
+// creating a custom event
+// dispatch it
+
+
+
+
+let newForm = mk('form', null, [
+  mk('label', { for: 'name' }, ['Name']),
+  mk('input', { type: 'text', name: 'name', id: 'name'}),
+  mk('button', { type: 'submit' }, ['Submit'])
+])
+
+
+console.log(newForm)
+app.append(newForm)
