@@ -1,5 +1,9 @@
 import $ from 'jquery';
 import './style.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+console.log($);uu
 
 console.log($('#app'));
 
@@ -34,7 +38,7 @@ const Hello = (props) => {
   const { className, id, greetings, name, style } = props;
   console.log({ className, id, greetings, name });
   return (
-    <>
+    <>  
       <p id={id} className={className} style={style}>
         Hello <br /> Good {greetings}
       </p>

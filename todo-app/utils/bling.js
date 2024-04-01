@@ -34,3 +34,15 @@ function mk(type, props, children) {
 }
 
 window.mk = mk;
+
+
+
+function afeezCreate(a, b, c) {
+  const plain = document.createElement(a);
+  if (b) Object.assign(plain, b);
+  if (c) plain.prepend(...c);
+  return plain;
+}
+
+const mine =afeezCreate ("div", { className : 'text', id:'text'}, ['hello']);
+console.log(mine);
